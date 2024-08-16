@@ -21,7 +21,7 @@ const BookMessageItem: React.FC<Props> = ({ bookMessage }) => {
   }
 
   return (
-    <Grid item sx={{ width: '300px' }}>
+    <Grid item sx={{ width: '300px', mt: 2 }}>
       <Card sx={{ height: '100%' }}>
         {bookMessage.author ? (
           <CardHeader title={bookMessage.author} />

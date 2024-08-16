@@ -9,7 +9,7 @@ import {
 import { useEffect } from 'react';
 import { createBookMessage, fetchBookMessages } from './bookMessagesThunks';
 import { BookMessageMutation } from '../../types';
-import BookMessageItem from './components/BookMessageItem';
+import BookMessageItems from './components/BookMessageItems';
 
 const BookMessages = () => {
   const dispatch = useAppDispatch();
@@ -43,9 +43,7 @@ const BookMessages = () => {
             <CircularProgress />
           </Grid>
         ) : (
-          bookMessages.map((bookMessage) => (
-            <BookMessageItem key={bookMessage.id} bookMessage={bookMessage} />
-          ))
+          <BookMessageItems bookMessages={bookMessages} />
         )}
       </Grid>
     </Grid>

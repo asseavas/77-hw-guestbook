@@ -58,7 +58,7 @@ const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
       alignItems="center"
       onSubmit={submitFormHandler}
     >
-      <Grid item>
+      <Grid item xs={3}>
         <TextField
           label="Author"
           id="author"
@@ -69,7 +69,7 @@ const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
           helperText={error}
         />
       </Grid>
-      <Grid item>
+      <Grid item xs={4}>
         <TextField
           required
           multiline
@@ -82,14 +82,14 @@ const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
           helperText={error}
         />
       </Grid>
-      <Grid item>
+      <Grid item xs={4}>
         <FileInput
           label="Image"
           name="image"
           onChange={fileInputChangeHandler}
         />
       </Grid>
-      <Grid item>
+      <Grid item xs={1}>
         <LoadingButton
           sx={{
             width: '100%',

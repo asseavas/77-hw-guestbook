@@ -15,7 +15,7 @@ const initialState: BookMessagesState = {
 };
 
 export const bookMessagesSlice = createSlice({
-  name: 'book-messages',
+  name: 'messages',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

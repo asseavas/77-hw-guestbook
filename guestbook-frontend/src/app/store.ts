@@ -3,7 +3,7 @@ import { bookMessagesReducer } from '../features/bookMessages/bookMessagesSlice'
 
 export const store = configureStore({
   reducer: {
-    bookMessages: bookMessagesReducer,
+    messages: bookMessagesReducer,
   },
 });
 

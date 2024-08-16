@@ -1,4 +1,5 @@
 export interface BookMessage {
+  id: string;
   message: string;
   image: string | null;
   author: string | null;

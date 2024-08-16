@@ -3,7 +3,7 @@ import { BookMessage, BookMessageMutation } from '../../types';
 import axiosApi from '../../axiosApi';
 
 export const fetchBookMessages = createAsyncThunk<BookMessage[]>(
-  'book-messages/fetchAll',
+  'messages/fetchAll',
   async () => {
     const { data: bookMessages } =
       await axiosApi.get<BookMessage[]>('/book-messages');
@@ -12,7 +12,7 @@ export const fetchBookMessages = createAsyncThunk<BookMessage[]>(
 );
 
 export const createBookMessage = createAsyncThunk<void, BookMessageMutation>(
-  'book-messages/create',
+  'messages/create',
   async (bookMessageMutation) => {
     const formData = new FormData();
     formData.append('message', bookMessageMutation.message);

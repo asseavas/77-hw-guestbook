@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, TextField } from '@mui/material';
+import { Button, Grid, Stack, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import SendIcon from '@mui/icons-material/Send';
 import { BookMessageMutation } from '../../../types';
@@ -8,6 +8,7 @@ import FileInput from '../../../UI/FileInput/FileInput';
 interface Props {
   onSubmit: (message: BookMessageMutation) => void;
   isLoading: boolean;
+  onClose: React.MouseEventHandler;
 }
 
 const emptyState: BookMessageMutation = {
@@ -16,7 +17,7 @@ const emptyState: BookMessageMutation = {
   author: null,
 };
 
-const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
+const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading, onClose }) => {
   const [state, setState] = useState<BookMessageMutation>(emptyState);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,62 +51,61 @@ const BookMessageForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
+    <Stack
+      spacing={3}
       component="form"
-      justifyContent="space-between"
+      direction="column"
       alignItems="center"
+      justifyContent="space-between"
       onSubmit={submitFormHandler}
     >
-      <Grid item xs={3}>
-        <TextField
-          label="Author"
-          id="author"
-          name="author"
-          value={state.author}
-          onChange={inputChangeHandler}
-          error={!!error}
-          helperText={error}
-        />
+      <TextField
+        label="Author"
+        id="author"
+        name="author"
+        value={state.author}
+        onChange={inputChangeHandler}
+        error={!!error}
+        helperText={error}
+      />
+      <TextField
+        required
+        multiline
+        label="Message"
+        id="message"
+        name="message"
+        value={state.message}
+        onChange={inputChangeHandler}
+        error={!!error}
+        helperText={error}
+      />
+      <FileInput label="Image" name="image" onChange={fileInputChangeHandler} />
+      <Grid container alignItems="center" justifyContent="space-between" pt={3}>
+        <Grid item>
+          <Button variant="outlined" color="warning" onClick={onClose}>
+            Cancel
+          </Button>
+        </Grid>
+        <Grid item>
+          <LoadingButton
+            sx={{
+              width: '90px',
+              height: '36px',
+              backgroundColor: error ? 'red' : 'primary.main',
+              '&:hover': {
+                backgroundColor: error ? 'darkred' : 'primary.dark',
+              },
+            }}
+            type="submit"
+            loading={isLoading}
+            endIcon={<SendIcon />}
+            variant="contained"
+          >
+            Save
+          </LoadingButton>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <TextField
-          required
-          multiline
-          label="Message"
-          id="message"
-          name="message"
-          value={state.message}
-          onChange={inputChangeHandler}
-          error={!!error}
-          helperText={error}
-        />
-      </Grid>
-      <Grid item xs={4}>
-        <FileInput
-          label="Image"
-          name="image"
-          onChange={fileInputChangeHandler}
-        />
-      </Grid>
-      <Grid item xs={1}>
-        <LoadingButton
-          sx={{
-            width: '100%',
-            height: '55px',
-            backgroundColor: error ? 'red' : 'primary.main',
-            '&:hover': {
-              backgroundColor: error ? 'darkred' : 'primary.dark',
-            },
-          }}
-          type="submit"
-          loading={isLoading}
-          endIcon={<SendIcon />}
-          variant="contained"
-        />
-      </Grid>
-    </Grid>
+    </Stack>
   );
 };
 

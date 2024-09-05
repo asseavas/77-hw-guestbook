@@ -23,16 +23,16 @@ const BookMessageItem: React.FC<Props> = ({ bookMessage }) => {
   return (
     <Grid item xs={3}>
       <Card sx={{ height: '100%' }}>
-        {bookMessage.author ? (
-          <CardHeader title={bookMessage.author} />
-        ) : (
-          <CardHeader title="Anonymous" />
-        )}
         {bookMessage.image && (
           <CardMedia
             image={cardImage}
             sx={{ height: 0, paddingTop: '56.25%' }}
           />
+        )}
+        {bookMessage.author ? (
+          <CardHeader title={bookMessage.author} sx={{ pb: 0 }} />
+        ) : (
+          <CardHeader title="Anonymous" sx={{ pb: 0 }} />
         )}
         <CardContent>
           <Typography>{bookMessage.message}</Typography>
